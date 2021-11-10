@@ -1,0 +1,35 @@
+{
+    "name": "s00d/no-captcha",
+    "description": "No CAPTCHA reCAPTCHA For Laravel.",
+    "keywords": ["recaptcha", "no-captcha", "captcha", "laravel", "laravel4", "laravel5", "laravel6"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "s00d",
+            "email": "s00d@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.5",
+        "illuminate/support": "^5.0|^6.0|^7.0|^8.0",
+        "guzzlehttp/guzzle": "^6.2|^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "s00d\\NoCaptcha\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "s00d\\NoCaptcha\\NoCaptchaServiceProvider"
+            ],
+            "aliases": {
+                "NoCaptcha": "s00d\\NoCaptcha\\Facades\\NoCaptcha"
+            }
+        }
+    }
+}
