@@ -7,24 +7,17 @@ use Illuminate\Support\ServiceProvider;
 class NoCaptchaServiceProvider extends ServiceProvider
 {
     /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = false;
-
-    /**
      * Bootstrap the application events.
      */
     public function boot()
     {
-        $app = $this->app;
+        $this->bootConfig();
 
-        if ($app instanceof LaravelApplication && $app->runningInConsole()) {
+        if ($this->app->runningInConsole()) {
             return;
         }
 
-        $this->bootConfig();
+        $app = $this->app;
 
         $app['validator']->extend('captcha', function ($attribute, $value) use ($app) {
             return $app['captcha']->verifyResponse($value, $app['request']->getClientIp());
@@ -56,10 +49,6 @@ class NoCaptchaServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if ($this->app->runningInConsole()) {
-            return;
-        }
-
         $this->app->singleton('captcha', function ($app) {
             return new NoCaptcha(
                 $app['config']['captcha.secret'],
